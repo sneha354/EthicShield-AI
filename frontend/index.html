@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EthicShield AI - AI Ethics, Fairness & Safety Auditor</title>
+    <link rel="stylesheet" href="/styles.css?v=3">
+    <!-- Chart.js for interactive analytics -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Top Navigation Bar -->
+    <header class="navbar">
+        <div class="nav-container">
+            <div class="brand">
+                <div class="brand-icon">🛡️</div>
+                <div class="brand-text">
+                    <span class="brand-title">EthicShield AI</span>
+                    <span class="brand-tag">Auditor v1.0</span>
+                </div>
+            </div>
+            <nav class="nav-links">
+                <a href="#auditor-section" class="nav-link active">Auditor</a>
+                <a href="#pillars-info" class="nav-link">5 Pillars</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="main-container">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="hero-badge">AI Governance & Compliance Engine</div>
+            <h1 class="hero-title">Audit ML Models & Datasets for Ethical AI</h1>
+            <p class="hero-desc">
+                Evaluate artificial intelligence systems against five foundational pillars: 
+                <strong>Explainability</strong>, <strong>Transparency</strong>, <strong>Fairness</strong>, 
+                <strong>Privacy</strong>, and <strong>Robustness</strong>. Generate executive reports and actionable remediation roadmaps.
+            </p>
+
+            <!-- 5 Pillars Badges -->
+            <div class="pillar-tags">
+                <div class="pillar-tag"><span class="tag-dot f-dot"></span> Fairness & Bias</div>
+                <div class="pillar-tag"><span class="tag-dot e-dot"></span> Explainability</div>
+                <div class="pillar-tag"><span class="tag-dot p-dot"></span> Privacy Protection</div>
+                <div class="pillar-tag"><span class="tag-dot r-dot"></span> Robustness & Safety</div>
+                <div class="pillar-tag"><span class="tag-dot t-dot"></span> Transparency</div>
+            </div>
+        </section>
+
+        <!-- Audit Input Section -->
+        <section id="auditor-section" class="audit-card">
+            <div class="portal-header">
+                <div class="portal-title-badge">ENTERPRISE AUDIT PORTAL</div>
+                <h2 class="portal-title">Autonomous AI Ethics & Safety Auditor</h2>
+                <p class="portal-subtitle">Upload any machine learning dataset and serialized model to execute automated, multi-pillar regulatory auditing under EU AI Act, NIST AI RMF, and IEEE 7000 standards.</p>
+            </div>
+
+            <!-- Custom Upload Portal -->
+            <div id="mode-custom" class="tab-content active" style="padding-top: 28px;">
+                <div class="autonomous-banner">
+                    <div class="auto-badge">✨ ZERO-CONFIGURATION AUTONOMOUS ENGINE</div>
+                    <p>EthicShield AI automatically discovers decision targets, detects all protected demographic attributes (gender, age, race, etc.), infers privileged reference baselines, and synthesizes legally compliant Model Cards on an overall holistic basis.</p>
+                </div>
+
+                <form id="custom-audit-form" onsubmit="handleCustomAudit(event)">
+                    <div class="form-grid">
+                        <!-- File Uploads -->
+                        <div class="form-group full-width">
+                            <label class="form-label">1. Upload Dataset (CSV, JSON, Parquet) <span class="req">*</span></label>
+                            <div class="drop-zone" id="dataset-dropzone">
+                                <input type="file" id="dataset-file" accept=".csv,.json,.parquet" onchange="handleDatasetSelect(event)">
+                                <div class="drop-zone-content">
+                                    <span class="upload-icon">📄</span>
+                                    <span class="upload-text" id="dataset-file-label">Drag & drop your dataset here or click to browse</span>
+                                    <span class="upload-hint">Supported formats: .csv, .json, .parquet</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label class="form-label">2. Upload Trained Model (Optional .pkl, .joblib)</label>
+                            <div class="drop-zone drop-zone-secondary" id="model-dropzone">
+                                <input type="file" id="model-file" accept=".pkl,.joblib" onchange="handleModelSelect(event)">
+                                <div class="drop-zone-content">
+                                    <span class="upload-icon">🧠</span>
+                                    <span class="upload-text" id="model-file-label">Upload scikit-learn / serialized model (Optional)</span>
+                                    <span class="upload-hint">If omitted, a comprehensive audit of dataset structure, representation bias, and PII will be conducted</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Single Collapsed Optional Customization Drawer -->
+                        <div class="form-group full-width">
+                            <details class="governance-details">
+                                <summary>⚙️ Advanced Customization (Optional Overrides & Legal Metadata)</summary>
+                                <div class="governance-fields">
+                                    <div class="gov-row">
+                                        <div class="form-group">
+                                            <label class="form-label" for="sensitive-col-select">Protected / Sensitive Attribute</label>
+                                            <select id="sensitive-col-select" class="form-control">
+                                                <option value="auto" selected>✨ Auto-Detect All Demographics (Holistic Audit)</option>
+                                            </select>
+                                            <small class="form-hint">E.g., gender, age, race, nationality</small>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="form-label" for="target-col-select">Target / Outcome Label</label>
+                                            <select id="target-col-select" class="form-control">
+                                                <option value="auto" selected>✨ Auto-Detect Primary Decision Target</option>
+                                            </select>
+                                            <small class="form-hint">E.g., approved, hired, readmitted, credit_risk</small>
+                                        </div>
+                                    </div>
+
+                                    <div class="gov-row">
+                                        <div class="form-group">
+                                            <label class="form-label" for="privileged-group-input">Privileged Group Value</label>
+                                            <input type="text" id="privileged-group-input" class="form-control" placeholder="Auto-inferred (Highest selection rate baseline)">
+                                            <small class="form-hint">Reference group for Four-Fifths disparity ratio</small>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="form-label" for="model-name-input">Model / System Name</label>
+                                            <input type="text" id="model-name-input" class="form-control" placeholder="Auto-inferred from model or filename">
+                                        </div>
+                                    </div>
+
+                                    <div class="gov-row">
+                                        <div class="form-group">
+                                            <label class="form-label">Primary Intended Use</label>
+                                            <input type="text" id="intended-use-input" class="form-control" placeholder="Auto-synthesized from feature and target schema">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label">Out-of-Scope / Prohibited Uses</label>
+                                            <input type="text" id="out-of-scope-input" class="form-control" placeholder="Auto-synthesized safety and oversight boundaries">
+                                        </div>
+                                    </div>
+
+                                    <div class="gov-row">
+                                        <div class="form-group">
+                                            <label class="form-label">Operational Domain</label>
+                                            <input type="text" id="domain-input" class="form-control" placeholder="e.g. Financial Services, Healthcare, HR">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label">Software / Data License</label>
+                                            <input type="text" id="license-input" class="form-control" placeholder="e.g. Apache-2.0, MIT, Proprietary">
+                                        </div>
+                                    </div>
+
+                                    <div class="checkbox-row">
+                                        <label>
+                                            <input type="checkbox" id="human-oversight-check" checked> 
+                                            System includes human-in-the-loop oversight protocol (EU AI Act Art. 14)
+                                        </label>
+                                    </div>
+                                </div>
+                            </details>
+                        </div>
+                    </div>
+
+                    <div class="submit-action">
+                        <button type="submit" class="btn-primary" id="btn-run-custom">
+                            ⚡ Run Autonomous Multi-Pillar Ethics Audit
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Audit Progress Spinner -->
+            <div id="audit-progress" class="audit-progress hidden">
+                <div class="spinner"></div>
+                <div class="progress-title">Performing AI Ethics & Safety Audit...</div>
+                <div class="progress-steps" id="progress-steps-label">
+                    Auditing Explainability, Transparency, Fairness, Privacy, and Robustness...
+                </div>
+            </div>
+        </section>
+
+        <!-- Audit Results Dashboard (Appears after audit) -->
+        <section id="results-section" class="results-section hidden">
+            <!-- Executive Summary Header -->
+            <div class="results-header-card">
+                <div class="results-title-row">
+                    <div>
+                        <span class="report-tag">AI Ethics & Safety Audit</span>
+                        <h2 class="results-system-name" id="res-system-name">Credit Lending Risk Model</h2>
+                        <p class="results-timestamp" id="res-timestamp">Audited: 2026-09-14 | 800 Instances | Target: approved</p>
+                    </div>
+                    <div class="report-actions">
+                        <button class="btn-secondary" onclick="exportReport('html')">
+                            📄 Download HTML Report
+                        </button>
+                        <button class="btn-secondary" onclick="exportReport('json')">
+                            💾 Export JSON Artifact
+                        </button>
+                    </div>
+                </div>
+
+                <div class="exec-summary-grid">
+                    <!-- Overall Score Dial -->
+                    <div class="score-box">
+                        <div class="score-circle-outer">
+                            <div class="score-value" id="res-overall-score">78.5</div>
+                            <div class="score-denom">/ 100</div>
+                        </div>
+                        <div class="score-grade-badge" id="res-letter-grade">Grade: B</div>
+                        <div class="risk-badge" id="res-risk-badge">MODERATE RISK</div>
+                    </div>
+
+                    <!-- 5 Pillars Radar Chart -->
+                    <div class="chart-box">
+                        <div class="chart-header">
+                            <span>Ethics Pillar Profile (0 - 100)</span>
+                        </div>
+                        <div class="radar-container">
+                            <canvas id="ethicsRadarChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Dataset & Model Metadata -->
+                    <div class="meta-box">
+                        <h4>Audit Scope & Context</h4>
+                        <ul class="meta-list">
+                            <li><span>Dataset Size:</span> <strong id="res-rows-count">-</strong></li>
+                            <li><span>Features Audited:</span> <strong id="res-cols-count">-</strong></li>
+                            <li><span>Sensitive Attribute:</span> <strong id="res-sensitive-attr">-</strong></li>
+                            <li><span>Model Architecture:</span> <strong id="res-model-type">-</strong></li>
+                            <li><span>Compliance Standard:</span> <strong>EU AI Act / NIST AI RMF</strong></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5 Pillar Cards Grid -->
+            <div class="pillars-score-grid">
+                <div class="pillar-metric-card" onclick="switchDetailTab('fairness')">
+                    <div class="p-card-top">
+                        <span class="p-name">Fairness & Bias</span>
+                        <span class="p-score" id="p-score-fairness">85</span>
+                    </div>
+                    <div class="p-bar"><div class="p-bar-fill" id="p-bar-fairness" style="width: 85%"></div></div>
+                    <div class="p-meta" id="p-meta-fairness">Disparate Impact: 0.91</div>
+                </div>
+
+                <div class="pillar-metric-card" onclick="switchDetailTab('explainability')">
+                    <div class="p-card-top">
+                        <span class="p-name">Explainability</span>
+                        <span class="p-score" id="p-score-explainability">80</span>
+                    </div>
+                    <div class="p-bar"><div class="p-bar-fill" id="p-bar-explainability" style="width: 80%"></div></div>
+                    <div class="p-meta" id="p-meta-explainability">SHAP Attributed</div>
+                </div>
+
+                <div class="pillar-metric-card" onclick="switchDetailTab('privacy')">
+                    <div class="p-card-top">
+                        <span class="p-name">Privacy Protection</span>
+                        <span class="p-score" id="p-score-privacy">90</span>
+                    </div>
+                    <div class="p-bar"><div class="p-bar-fill" id="p-bar-privacy" style="width: 90%"></div></div>
+                    <div class="p-meta" id="p-meta-privacy">PII Scanned (Presidio)</div>
+                </div>
+
+                <div class="pillar-metric-card" onclick="switchDetailTab('robustness')">
+                    <div class="p-card-top">
+                        <span class="p-name">Robustness & Safety</span>
+                        <span class="p-score" id="p-score-robustness">75</span>
+                    </div>
+                    <div class="p-bar"><div class="p-bar-fill" id="p-bar-robustness" style="width: 75%"></div></div>
+                    <div class="p-meta" id="p-meta-robustness">Stress Perturbation Tested</div>
+                </div>
+
+                <div class="pillar-metric-card" onclick="switchDetailTab('transparency')">
+                    <div class="p-card-top">
+                        <span class="p-name">Transparency</span>
+                        <span class="p-score" id="p-score-transparency">70</span>
+                    </div>
+                    <div class="p-bar"><div class="p-bar-fill" id="p-bar-transparency" style="width: 70%"></div></div>
+                    <div class="p-meta" id="p-meta-transparency">Model Card & Datasheet</div>
+                </div>
+            </div>
+
+            <!-- Prioritized Action Roadmap -->
+            <div class="roadmap-card">
+                <div class="roadmap-header">
+                    <h3>🛠️ Prioritized Remediation Roadmap</h3>
+                    <span class="roadmap-subtitle" id="actions-count-label">Actions required before production sign-off</span>
+                </div>
+                <div class="actions-list" id="actions-container">
+                    <!-- Populated dynamically -->
+                </div>
+            </div>
+
+            <!-- Detailed Deep Dive Tabs -->
+            <div class="details-container">
+                <div class="details-tab-bar">
+                    <button class="d-tab-btn active" onclick="switchDetailTab('fairness')">⚖️ Fairness</button>
+                    <button class="d-tab-btn" onclick="switchDetailTab('explainability')">🔍 Explainability</button>
+                    <button class="d-tab-btn" onclick="switchDetailTab('privacy')">🔒 Privacy</button>
+                    <button class="d-tab-btn" onclick="switchDetailTab('robustness')">🛡️ Robustness</button>
+                    <button class="d-tab-btn" onclick="switchDetailTab('transparency')">📜 Transparency</button>
+                </div>
+
+                <!-- Tab 1: Fairness Detail -->
+                <div id="d-tab-fairness" class="d-tab-pane active">
+                    <div class="pane-grid">
+                        <div class="pane-card">
+                            <h4>Regulatory Fairness Metrics</h4>
+                            <div class="metrics-table-wrapper" id="fairness-metrics-table"></div>
+                        </div>
+                        <div class="pane-card">
+                            <h4>Subgroup Selection & Outcome Rates</h4>
+                            <div class="chart-wrapper">
+                                <canvas id="subgroupChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pane-card full-width-card" style="margin-top: 16px;">
+                        <h4>Demographic Subgroup Breakdown</h4>
+                        <div class="metrics-table-wrapper" id="subgroup-breakdown-table"></div>
+                    </div>
+                </div>
+
+                <!-- Tab 2: Explainability Detail -->
+                <div id="d-tab-explainability" class="d-tab-pane">
+                    <div class="pane-grid">
+                        <div class="pane-card">
+                            <h4>Top Feature Attributions (SHAP Global Importance)</h4>
+                            <div class="chart-wrapper">
+                                <canvas id="featureImpChart"></canvas>
+                            </div>
+                        </div>
+                        <div class="pane-card">
+                            <h4>Model Interpretability & Surrogate Fidelity</h4>
+                            <div class="info-kpi-list" id="explainability-kpi-list"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab 3: Privacy Detail -->
+                <div id="d-tab-privacy" class="d-tab-pane">
+                    <div class="pane-grid">
+                        <div class="pane-card">
+                            <h4>Detected PII Entities (Microsoft Presidio)</h4>
+                            <div class="metrics-table-wrapper" id="pii-findings-table"></div>
+                        </div>
+                        <div class="pane-card">
+                            <h4>Re-identification & Linkage Risk (k-Anonymity)</h4>
+                            <div class="info-kpi-list" id="privacy-kpi-list"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab 4: Robustness Detail -->
+                <div id="d-tab-robustness" class="d-tab-pane">
+                    <div class="pane-grid">
+                        <div class="pane-card">
+                            <h4>Input Noise Perturbation Stress Test</h4>
+                            <div class="metrics-table-wrapper" id="noise-stress-table"></div>
+                        </div>
+                        <div class="pane-card">
+                            <h4>Dataset Anomalies & Boundary Stability</h4>
+                            <div class="info-kpi-list" id="robustness-kpi-list"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab 5: Transparency Detail -->
+                <div id="d-tab-transparency" class="d-tab-pane">
+                    <div class="pane-grid">
+                        <div class="pane-card">
+                            <h4>Governance Checklist Compliance</h4>
+                            <div class="metrics-table-wrapper" id="governance-checklist-table"></div>
+                        </div>
+                        <div class="pane-card">
+                            <h4>Auto-Generated Model Card (Mitchell et al.)</h4>
+                            <div class="model-card-preview" id="model-card-preview"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Informational Section on the 5 Pillars -->
+        <section id="pillars-info" class="pillars-info-section">
+            <h2 class="info-title">The 5 Pillars of Ethical AI Auditing</h2>
+            <div class="info-grid">
+                <div class="info-pillar-card">
+                    <div class="info-icon">⚖️</div>
+                    <h3>1. Fairness & Bias</h3>
+                    <p>Detects algorithmic discrimination, demographic disparity, and violation of the Four-Fifths (80%) Rule across sensitive protected groups (gender, race, age).</p>
+                </div>
+                <div class="info-pillar-card">
+                    <div class="info-icon">🔍</div>
+                    <h3>2. Explainability</h3>
+                    <p>Quantifies model interpretability using SHAP feature attributions, surrogate decision tree fidelity, and checks against single-feature dominance.</p>
+                </div>
+                <div class="info-pillar-card">
+                    <div class="info-icon">🔒</div>
+                    <h3>3. Privacy Protection</h3>
+                    <p>Scans datasets for Personally Identifiable Information (PII) using Microsoft Presidio, assesses k-anonymity linkage risk, and detects membership inference vulnerability.</p>
+                </div>
+                <div class="info-pillar-card">
+                    <div class="info-icon">🛡️</div>
+                    <h3>4. Robustness & Safety</h3>
+                    <p>Evaluates stability under adversarial input noise jitter, missing-data dropout, extreme out-of-distribution (OOD) boundaries, and anomaly distributions.</p>
+                </div>
+                <div class="info-pillar-card">
+                    <div class="info-icon">📜</div>
+                    <h3>5. Transparency</h3>
+                    <p>Automatically drafts standardized Model Cards and Dataset Datasheets, validating documentation completeness against EU AI Act and NIST AI RMF guidelines.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>EthicShield AI &bull; Built for Trustworthy, Responsible, and Compliant Machine Learning Systems</p>
+    </footer>
+
+    <!-- Application Script -->
+    <script src="/app.js?v=2"></script>
+</body>
+</html>
+
