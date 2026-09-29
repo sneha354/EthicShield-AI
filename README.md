@@ -38,10 +38,7 @@ cd EthicShield-AI
 pip install -r requirements.txt
 ```
 
-### 2. Generate the Pre-Packaged Reviewer Model (1-Command)
-Generate the production-grade scikit-learn classifier for the included real-world German Credit dataset:
-```bash
-python create_real_world_sample.py
+### 2. Demo dataset and model for testing ( any other can be used)
 ```
 This prepares:
 * 📄 **Dataset:** `real_world_data/german_credit_dataset.csv` *(Authentic Statlog / UCI Credit records)*
