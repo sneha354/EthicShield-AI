@@ -27,7 +27,7 @@
 
 ## 🚀 How to run
 
-To make it effortless for reviewers to evaluate the platform without hunting for external data, the repository includes an **industry-standard benchmark dataset** and a pre-configured model generator right in the `real_world_data/` directory.
+To make it effortless for reviewers to evaluate the platform without hunting for external data, the repository includes an **industry-standard benchmark dataset** and a pre-trained model right in the `real_world_data/` directory.
 
 ### 1. Installation
 
