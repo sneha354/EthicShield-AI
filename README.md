@@ -40,9 +40,9 @@ pip install -r requirements.txt
 
 ### 2. Demo dataset and model for testing ( any other can be used)
 ```
-This prepares:
 * 📄 **Dataset:** `real_world_data/german_credit_dataset.csv` *(Authentic Statlog / UCI Credit records)*
 * 🧠 **Model:** `real_world_data/german_credit_model.joblib` *(Trained Random Forest Classifier)*
+```
 
 ### 3. Launch the Audit Portal
 ```bash
