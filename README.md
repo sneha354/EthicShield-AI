@@ -25,7 +25,7 @@
 
 ---
 
-## 🚀 Quick Start for Industry Reviewers (Test in 60 Seconds)
+## 🚀 How to run
 
 To make it effortless for reviewers to evaluate the platform without hunting for external data, the repository includes an **industry-standard benchmark dataset** and a pre-configured model generator right in the `real_world_data/` directory.
 
